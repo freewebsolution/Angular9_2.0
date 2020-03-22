@@ -1,12 +1,12 @@
 {
   "books": [
     {
-      "id": 1,
       "title": "Il nome della rosa",
       "author": "Umberto eco",
       "price": 20,
       "isbn": "978-81-7525-766-5",
-      "description": "Il nome della rosa"
+      "description": "Il nome della rosa",
+      "id": 1
     },
     {
       "id": 2,
@@ -23,6 +23,14 @@
       "price": 11,
       "isbn": "978-81-7525-766-5",
       "description": "Gli arancni di Montalbano"
+    },
+    {
+      "title": "Siddhartha",
+      "author": "Hermann Hesse",
+      "price": 6.9,
+      "isbn": "978-81-7525-766-5",
+      "description": "Siddartha",
+      "id": 4
     }
   ]
 }
