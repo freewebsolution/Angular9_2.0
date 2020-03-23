@@ -56,7 +56,7 @@ export class FormComponent implements OnInit {
   }
 
   add(form: NgForm) {
-    this.http.post<Book>(`${ApiUrl}`, form.value)
+    this.bookService.addBook(form)
       .subscribe((res: Book) => {
         this.books.push(res);
         form.reset();
@@ -65,7 +65,7 @@ export class FormComponent implements OnInit {
   }
 
   edit(form: NgForm) {
-    this.http.patch<Book>(`${ApiUrl}/${this.active.id}`, form.value)
+    this.bookService.editBook(form, this.active)
       .subscribe(res => {
         const index = this.books.findIndex(b => b.id === this.active.id);
         this.books[index] = res;

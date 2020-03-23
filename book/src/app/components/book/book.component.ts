@@ -82,7 +82,7 @@ export class BookComponent implements OnInit {
   delete(event, book: Book) {
     event.stopPropagation();
     // const index = this.books.indexOf(book);
-    this.http.delete<Book>(`${ApiUrl}/${book.id}`)
+    this.bookService.deleteBook(book)
       .subscribe(() => {
           const index = this.books.findIndex(b => b.id === book.id);
           this.books.splice(index, 1);
