@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Book} from '../../model/book';
-import {NgForm} from '@angular/forms';
+import {BookService} from '../../service/book.service';
 
 const ApiUrl = 'http://localhost:3000/books';
 
@@ -68,11 +68,11 @@ export class BookComponent implements OnInit {
   error: any;
   active: Book;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private bookService: BookService) {
   }
 
   getAll() {
-    this.http.get<Book[]>(ApiUrl)
+    this.bookService.getAll()
       .subscribe((res: Book[]) => {
           this.books = res;
         },

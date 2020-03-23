@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../../model/book';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {BookService} from '../../service/book.service';
 const ApiUrl = 'http://localhost:3000/books';
 @Component({
   selector: 'app-form',
@@ -72,6 +73,7 @@ export class FormComponent implements OnInit {
   }
   reset(form: NgForm) {
     this.active = null;
+    this.books = null;
     this.imageSrc = null;
     form.reset();
   }
@@ -93,7 +95,8 @@ export class FormComponent implements OnInit {
     }
 
   }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private bookService: BookService) {
+
   }
 
   ngOnInit(): void {
