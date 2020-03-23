@@ -21,6 +21,7 @@ const ApiUrl = 'http://localhost:3000/books';
               [ngClass]="{'active': book.id === active?.id}"
               (click)="setActive(book)"
             >
+              <img [src]="book.img ? book.img : '../../assets/img/copertineLibri/add.png'" class="img-thumbnail mr-2" alt="" width="40">
               {{book.title}} - {{book.author}}
               <div class="pull-right">
                 <span [style.color]="book.price > 15 ? 'red' : null">€ {{book.price | number:'1.2-2'}}</span>
@@ -47,6 +48,18 @@ const ApiUrl = 'http://localhost:3000/books';
               <textarea [ngModel]="active?.description" class="form-control" rows="3" name="description"
                         placeholder="Insert description..."></textarea>
             </div>
+            <div class="form-group">
+              <input style="display: none" type="file" class="form-control" name="img" (change)="readUrl($event)" #selectedFile>
+            </div>
+            <div class="mb-3">
+              <img *ngIf="active" [src]="active?.img" height="130">
+              <img *ngIf="this.imageSrc" [src]="this.imageSrc" height="130">
+              <button type="button" class="btn btn-outline-warning btn-sm ml-1" (click)="selectedFile.click()">
+                SELECT IMAGE
+              </button>
+            </div>
+            <input *ngIf="this.imageSrc" [ngModel]="this.imageSrc" type="hidden" name="img">
+            <input *ngIf="active" [ngModel]="active.img" type="hidden" name="img">
             <button type="submit" class="btn btn-outline-warning btn-sm mr-1">{{active ? 'EDIT' : 'ADD'}}</button>
             <button type="button" class="btn btn-outline-success btn-sm mr-1" (click)="reset(f)">RESET</button>
           </form>
@@ -81,6 +94,7 @@ export class BookComponent implements OnInit {
   books: Book[];
   error: any;
   active: Book;
+  imageSrc: string;
 
   constructor(private http: HttpClient) {
   }
@@ -105,6 +119,8 @@ export class BookComponent implements OnInit {
     this.http.post<Book>(`${ApiUrl}`, form.value)
       .subscribe((res: Book) => {
         this.books.push(res);
+        form.reset();
+        this.imageSrc = null;
       });
   }
 
@@ -134,8 +150,28 @@ export class BookComponent implements OnInit {
 
   reset(form: NgForm) {
     this.active = null;
+    this.imageSrc = null;
     form.reset();
   }
+
+  readUrl(event: any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      if (this.active) {
+        reader.onload = () => {
+          this.active.img = reader.result as string;
+        };
+      } else {
+          reader.onload = () => {
+            this.imageSrc = reader.result as string;
+          };
+        }
+      }
+
+    }
+
 
   ngOnInit(): void {
     this.getAll();
