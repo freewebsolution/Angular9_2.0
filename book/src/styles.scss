@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.ngx-pagination {
+  // border:1px solid #dadada;
+  margin:5px auto;
+  width: auto !important;
+  font-size: 1rem !important
+}
+.ngx-pagination li {
+  color:#0085A1;
+}
+.ngx-pagination a, .ngx-pagination button {
+  color:#0085A1 !important;
+  display: block;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 2px !important;
+  border: 1px solid #dadada !important ;
+}
+.pagination-next.disabled {
+  border: 1px solid #dadada !important ;
+}
+
+.pagination-previous.disabled {
+  border: 1px solid #dadada !important ;
+}

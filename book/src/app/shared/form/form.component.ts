@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../../model/book';
 import {NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
@@ -9,20 +9,20 @@ const ApiUrl = 'http://localhost:3000/books';
   template: `
     <form #f="ngForm" (submit)="save(f)">
       <div class="form-group">
-        <input [ngModel]="active?.title" type="text" class="form-control" name="title" placeholder="Insert title...">
+        <input [ngModel]="active?.title" type="text" class="form-control" name="title" placeholder="Insert title..." required>
       </div>
       <div class="form-group">
-        <input [ngModel]="active?.author" type="text" class="form-control" name="author" placeholder="Insert author...">
+        <input [ngModel]="active?.author" type="text" class="form-control" name="author" placeholder="Insert author..." required>
       </div>
       <div class="form-group">
-        <input [ngModel]="active?.price" type="number" class="form-control" name="price" placeholder="Insert price...">
+        <input [ngModel]="active?.price" type="number" class="form-control" name="price" placeholder="Insert price..." required>
       </div>
       <div class="form-group">
-        <input [ngModel]="active?.isbn" type="text" class="form-control" name="isbn" placeholder="Insert isbn...">
+        <input [ngModel]="active?.isbn" type="text" class="form-control" name="isbn" placeholder="Insert isbn..." required>
       </div>
       <div class="form-group">
               <textarea [ngModel]="active?.description" class="form-control" rows="3" name="description"
-                        placeholder="Insert description..."></textarea>
+                        placeholder="Insert description..." required></textarea>
       </div>
       <div class="form-group">
         <input style="display: none" type="file" class="form-control" name="img" (change)="readUrl($event)" #selectedFile>
@@ -34,17 +34,25 @@ const ApiUrl = 'http://localhost:3000/books';
           SELECT IMAGE
         </button>
       </div>
-      <input *ngIf="this.imageSrc" [ngModel]="this.imageSrc" type="hidden" name="img">
-      <input *ngIf="active" [ngModel]="active.img" type="hidden" name="img">
-      <button type="submit" class="btn btn-outline-warning btn-sm mr-1">{{active ? 'EDIT' : 'ADD'}}</button>
+      <input *ngIf="this.imageSrc" [ngModel]="this.imageSrc" type="hidden" name="img" required>
+      <input *ngIf="active" [ngModel]="active.img" type="hidden" name="img" required>
+      <button type="submit" class="btn btn-outline-warning btn-sm mr-1" [disabled]="f.invalid">{{active ? 'EDIT' : 'ADD'}}</button>
       <button type="button" class="btn btn-outline-success btn-sm mr-1" (click)="reset(f)">RESET</button>
     </form>
   `,
-  styles: []
+  styles: [`
+    .btn-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      line-height: 1.5;
+      border-radius: .2rem;
+    }
+  `]
 })
 export class FormComponent implements OnInit {
   @Input() active: Book;
   @Input() books: Book[];
+  @Output() resetClick: EventEmitter<Book> = new EventEmitter<Book>();
   imageSrc: string;
 
   save(form: NgForm) {
@@ -75,6 +83,7 @@ export class FormComponent implements OnInit {
     this.active = null;
     this.books = null;
     this.imageSrc = null;
+    this.resetClick.emit();
     form.reset();
   }
 
@@ -95,11 +104,8 @@ export class FormComponent implements OnInit {
     }
 
   }
-  constructor(private http: HttpClient, private bookService: BookService) {
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

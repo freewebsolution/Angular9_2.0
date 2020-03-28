@@ -10,14 +10,21 @@ import { FooterComponent } from './shared/footer/footer.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { FormComponent } from './shared/form/form.component';
-
+import { BookDetailComponent } from './features/book-detail/book-detail.component';
+import { SpinnerComponent } from './features/spinner/spinner.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { TruncatePipe } from './pipe/truncate.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     HeaderComponent,
     FooterComponent,
-    FormComponent
+    FormComponent,
+    BookDetailComponent,
+    SpinnerComponent,
+    TruncatePipe
 
   ],
   imports: [
@@ -25,7 +32,9 @@ import { FormComponent } from './shared/form/form.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

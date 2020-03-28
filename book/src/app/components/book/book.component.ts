@@ -3,8 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Book} from '../../model/book';
 import {BookService} from '../../service/book.service';
 
-const ApiUrl = 'http://localhost:3000/books';
-
 @Component({
   selector: 'app-book',
   template: `
@@ -14,9 +12,20 @@ const ApiUrl = 'http://localhost:3000/books';
       <div *ngIf="error" class="alert alert-danger">Error</div>
       <div class="row">
         <div class="col-lg-6 col-md-12 mx-0">
+          <app-spinner *ngIf="!books"></app-spinner>
+          <div class="search-book">
+            <input
+              type="text"
+              class="form-control"
+              name="search"
+              [(ngModel)]="term"
+              autocomplete="off"
+              placeholder="&#61442; Cerca tramite titolo o autore..."
+            >
+          </div>
           <ul class="list-group">
             <li
-              *ngFor="let book of books"
+              *ngFor="let book of books | paginate: {itemsPerPage: 5, currentPage: p} | filter:term"
               class="list-group-item"
               [ngClass]="{'active': book.id === active?.id}"
               (click)="setActive(book)"
@@ -25,15 +34,18 @@ const ApiUrl = 'http://localhost:3000/books';
               {{book.title}} - {{book.author}}
               <div class="pull-right">
                 <span [style.color]="book.price > 15 ? 'red' : null">€ {{book.price | number:'1.2-2'}}</span>
+                <i class=" fa fa-info-circle ml-2" aria-hidden="true" [routerLink]="['/book', book.id]"></i>
                 <i class="fa fa-trash ml-2" (click)="delete($event,book)"></i>
               </div>
             </li>
           </ul>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
         <div class="col-lg-6 col-md12 mx-0">
           <app-form
             [active]="active"
             [books]="books"
+            (resetClick)="reset()"
           >
           </app-form>
         </div>
@@ -54,12 +66,19 @@ const ApiUrl = 'http://localhost:3000/books';
       background-color: darkorange;
       border-color: darkorange;
     }
+    .search-book {
+      max-width: 500px;
+      padding-bottom: 10px;
+      margin: auto;
+      color: #405065;
+    }
 
-    .btn-sm {
-      padding: .25rem .5rem;
-      font-size: .875rem;
-      line-height: 1.5;
-      border-radius: .2rem;
+    .form-control {
+      box-shadow: 0 10px 40px 0 #B0C1D9;
+    }
+
+    .form-control::placeholder {
+      font-family: FontAwesome;
     }
   `]
 })
@@ -67,6 +86,8 @@ export class BookComponent implements OnInit {
   books: Book[];
   error: any;
   active: Book;
+  p = 1;
+  term;
 
   constructor(private http: HttpClient, private bookService: BookService) {
   }
@@ -95,6 +116,9 @@ export class BookComponent implements OnInit {
     this.active = book;
   }
 
+  reset() {
+    this.active = null;
+  }
 
   ngOnInit(): void {
     this.getAll();

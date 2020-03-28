@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="index.html"><i class="fa fa-book"></i>Book</a>
+        <a class="navbar-brand" routerLink="book"><i class="fa fa-book"></i>Book</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -15,10 +15,7 @@ import {Component, OnInit} from '@angular/core';
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" routerLink="book">Book</a>
             </li>
           </ul>
         </div>
