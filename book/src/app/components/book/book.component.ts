@@ -25,7 +25,7 @@ import {BookService} from '../../service/book.service';
           </div>
           <ul class="list-group">
             <li
-              *ngFor="let book of books | paginate: {itemsPerPage: 5, currentPage: p} | filter:term"
+              *ngFor="let book of books  | filter:term | paginate: {itemsPerPage: 5, currentPage: p}"
               class="list-group-item"
               [ngClass]="{'active': book.id === active?.id}"
               (click)="setActive(book)"

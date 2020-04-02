@@ -66,7 +66,10 @@ export class FormComponent implements OnInit {
   add(form: NgForm) {
     this.bookService.addBook(form)
       .subscribe((res: Book) => {
-        this.books.push(res);
+        setTimeout(() => {
+          this.books.push(res);
+        }, 500);
+        location.reload();
         form.reset();
         this.imageSrc = null;
       });
@@ -77,6 +80,7 @@ export class FormComponent implements OnInit {
       .subscribe(res => {
         const index = this.books.findIndex(b => b.id === this.active.id);
         this.books[index] = res;
+        location.reload();
       });
   }
   reset(form: NgForm) {
