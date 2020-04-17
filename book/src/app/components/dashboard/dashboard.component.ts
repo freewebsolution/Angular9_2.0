@@ -34,7 +34,7 @@ import {BookService} from '../../service/book.service';
               {{book.title}} - {{book.author}}
               <div class="pull-right">
                 <span [style.color]="book.price > 15 ? 'red' : null">€ {{book.price | number:'1.2-2'}}</span>
-                <i class=" fa fa-info-circle ml-2" aria-hidden="true" [routerLink]="['/book', book.id]"></i>
+                <i class=" fa fa-info-circle ml-2" aria-hidden="true" [routerLink]="['/dashboard', book.id]"></i>
                 <i class="fa fa-trash ml-2" (click)="delete($event,book)"></i>
               </div>
             </li>
@@ -82,7 +82,7 @@ import {BookService} from '../../service/book.service';
     }
   `]
 })
-export class BookComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   books: Book[];
   error: any;
   active: Book;
@@ -102,7 +102,7 @@ export class BookComponent implements OnInit {
 
   delete(event, book: Book) {
     event.stopPropagation();
-    // const index = this.books.indexOf(book);
+    // const index = this.books.indexOf(dashboard);
     this.bookService.deleteBook(book)
       .subscribe(() => {
           const index = this.books.findIndex(b => b.id === book.id);
