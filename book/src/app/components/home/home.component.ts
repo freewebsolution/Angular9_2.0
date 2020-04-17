@@ -18,7 +18,8 @@ import {Book} from '../../model/book';
               <div class="strip">
                 <h4>{{book.title}}</h4>
                 <h5>Author: {{book.author}}</h5>
-                <h6 style="text-align: center"><i class="fa fa-share-square-o fa-2x" aria-hidden="true" [routerLink]="['book' , book.id]"></i> <i
+                <h6 style="text-align: center"><i class="fa fa-share-square-o fa-2x" aria-hidden="true"
+                                                  [routerLink]="['book' , book.id]"></i> <i
                   class="fa fa-heart-o fa-2x"></i></h6>
               </div>
             </figcaption>
@@ -92,13 +93,15 @@ export class HomeComponent implements OnInit {
 
   constructor(private bookService: BookService) {
   }
-getAll() {
+
+  getAll() {
     this.bookService.getAll()
       .subscribe(res => {
         this.books = res;
         console.log(this.books);
       });
-}
+  }
+
   ngOnInit(): void {
     this.getAll();
   }

@@ -11,7 +11,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]},
   {path: '' , component: HomeComponent},
   {path: 'book/:id', component: BookDetailComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'logout', redirectTo: 'login' , pathMatch: 'full'}
 ];
 
 @NgModule({

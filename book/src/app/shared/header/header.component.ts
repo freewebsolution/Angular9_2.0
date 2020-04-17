@@ -17,6 +17,17 @@ import {DOCUMENT} from '@angular/common';
         </button>
         <div [ngbCollapse]="!isCollapsed" class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngFor="let link of linkMenu">
+              <a class="nav-link" [routerLink]="this.auth.checkDir() + link.url">{{link.text}}</a>
+            </li>
+            <li *ngIf="!this.auth.notExpired(); else logout" class="nav-item">
+              <a class="nav-link" routerLink="login">Login <i class="fa fa-lock"></i></a>
+            </li>
+            <ng-template #logout>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="logout">Logout <i class="fa fa-unlock"></i></a>
+              </li>
+            </ng-template>
           </ul>
         </div>
       </div>
@@ -51,26 +62,29 @@ una promessa di felicità"<br><small><i>(Stendhal, Dell'amore)</i></small></span
         margin-top: 0 !important;
         margin-bottom: 20px;
         background: #f3f3f3f3;
-        padding-top:0px;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        padding-top: 0px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
       }
-      .subHeader ul li{
+
+      .subHeader ul li {
         display: table-cell;
         vertical-align: middle;
       }
+
       .subHeader ul li a {
         font-family: 'Montserrat', sans-serif;
         color: #424242;
         text-transform: uppercase;
         font-weight: bold;
       }
+
       .subHeader > ul > li > a {
         background-color: #f3f3f3;
         border-right: 1px solid #d3d3d3;
         padding-left: 180px;
         right: 30px;
-        padding-top:0;
-        height:50px !important;
+        padding-top: 0;
+        height: 50px !important;
         display: table-cell;
         width: 25% !important;
         vertical-align: middle;
