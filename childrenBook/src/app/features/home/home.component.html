@@ -1,0 +1,83 @@
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1 class="headerTitle">Children Books</h1>
+          <span class="subheading">
+            <form #f="ngForm" (submit)="searchBooks(f.value.text)">
+              <div class="form">
+                <i class="fas fa-search fs-4"></i><input type="text" class="form-control form-input"
+                                                         placeholder="Search Book..." [ngModel]="text" name="text"> <span class="left-pan"><button
+                class="btn btn-secondary" type="submit">Search</button></span>
+                </div>
+                </form>
+                </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5">
+    <!--search result-->
+    <div class="col-sm-6 mb-3" [ngClass]="{'border-radius':this.books?.length > 2}">
+      <div *ngIf="this.books">
+        <small><b>Result for {{text}}: {{this.books?.length}} items</b></small>
+        <hr class="my-1" />
+      </div>
+      <!-- Search preview-->
+      <div *ngFor="let book of books" class="post-preview searchResult">
+        <img [src]="book.images" class="img-fluid" alt="">
+        <h4 class="post-title">{{book.title}}</h4>
+        <p class="post-meta">Autore: <em><i>{{book.author}}</i></em>
+          <br> Isbn: {{book.isbn}}
+        </p>
+        <hr class="my-4" />
+      </div>
+    </div>
+    <!--feedback and cart-->
+    <div class="col-sm-6">
+      <!-- Post preview-->
+      <div class="post-preview">
+        <h2 class="post-title">Lisola del tesoro
+          <i class="fas fa-info-circle blue" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+        </h2>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">L'isola del tesoro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at consequat orci. Nam at ipsum ultrices augue molestie scelerisque non quis ex. Aenean at tristique enim, ut maximus diam. Curabitur scelerisque ut mauris ut porta. Nulla porttitor convallis
+                facilisis. Praesent aliquet sapien nibh, id mattis metus iaculis non. Vivamus dictum a eros in porttitor. Cras sed ipsum maximus, auctor mauris id, eleifend eros. Nam a ex ac nunc placerat ullamcorper. Proin mollis, nulla
+                in pellentesque luctus, purus nisi viverra justo, eget rutrum nibh nulla eget velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed a tortor felis. Vivamus sed turpis tortor.
+                Curabitur dolor ante, tempus in massa quis, pharetra volutpat augue. Cras non leo eget nisi facilisis scelerisque id semper dui. Proin et fermentum ex...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="post-meta">
+          Author: R.Louis Stevenson <br> Isbn: 9857-25487-125<br> Pagine: 120<br> Categorie: Avventura,Romanzo,Ragazzi
+          <br> Anno di uscita: 1853<br> Feedback:
+          <i class="fas fa-star gold"></i>
+          <i class="fas fa-star gold"></i>
+          <i class="fas fa-star gold"></i>
+          <i class="fas fa-star gold"></i>
+          <i class="far fa-star"></i><br>
+          <b>Price: 12.35 €</b>
+        </p>
+        <button class="btn btn-success">Add to cart</button>
+      </div>
+
+      <!-- Pager-->
+    </div>
+  </div>
+</div>
