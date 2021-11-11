@@ -10,6 +10,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IntToArrayPipe } from './shared/pipes/int-to-array.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    IntToArrayPipe
   ],
   imports: [
     BrowserModule,
