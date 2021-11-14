@@ -8,24 +8,28 @@
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Riepilogo ordine ({{cart.items.length}})</p>
+                                <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4" *ngIf="cart.items.length === 0">Il tuo Carrello è vuoto!</p>
                                 <ul *ngFor="let item of cart.items" class="list-group list-group-flush">
                                     <li class="list-group-item  d-flex justify-content-between align-items-center text-respo">
-                                        {{item.book.title}} ({{item.count}})<span class="float-end"><em><b>{{(item.book.price).toFixed(2)}} €</b></em>
-                      <a (click)="cart.increment(item.book)"><i class="fas fa-plus-circle me-1 ms-1" style="color:green"></i></a>
-                      <a (click)="cart.minusToCart(item)"><i class="fas fa-minus-circle" style="color: red"></i></a>
+                                        {{item.book.title}} ({{item.count}})<span class="float-end"><em><b>{{(item.book.price).toFixed(2)}}
+                          €</b></em>
+                      <a (click)="cart.increment(item.book)"><i class="fas fa-plus-circle me-1 ms-1"
+                          style="color:green"></i></a>
+                      <a (click)="cart.decrement(item.book)"><i class="fas fa-minus-circle" style="color: red"></i></a>
                     </span>
                                     </li>
                                     <br>
                                 </ul>
-                                <p>Totale:
-                                    <span *ngIf="cart.items.length" style="color:red">
+                                <p *ngIf="cart.items.length">Totale:
+                                    <span style="color:red">
                     {{locationsSum() |number:'1.2'}}
-                  </span> € <button class="btn btn-success float-end">Proceed</button>
+                  </span> €
+                                    <button type="submit " (click)="cart.proceed() " class="btn btn-success float-end ">Proceed</button>
                                 </p>
                             </div>
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
 
-                                <img src="assets/img/draw1.png" class="img-fluid" alt="Sample image">
+                                <img src="assets/img/draw1.png " class="img-fluid " alt="Sample image ">
 
                             </div>
                         </div>

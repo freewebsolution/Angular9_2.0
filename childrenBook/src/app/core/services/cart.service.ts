@@ -27,12 +27,19 @@ export class CartService {
       // alert(`Hai già aggiunto il titolo ${book.title}`)
       this.increment(book)
     }
-
   }
 
   minusToCart(CartItem: CartItem): any {
     this.items = this.items.filter(item => item.creationDate !== CartItem.creationDate)
     console.log(this.items)
+  }
+  decrement(book: Book): any {
+    let index = this.items.findIndex(i => i.book.id === book.id);
+    this.items[index].book.price -= book.price / this.items[index].count
+    this.items[index].count--
+    if (this.items[index].count === 0) {
+      this.minusToCart(this.items[index])
+    }
   }
   increment(book: Book): any {
     let index = this.items.findIndex(i => i.book.id === book.id);
@@ -41,6 +48,6 @@ export class CartService {
   }
 
   proceed(): any {
-    window.alert(this.items.length)
+    console.log(this.items.length)
   }
 }

@@ -6,9 +6,9 @@
 @import "feedback.css";
 @import "login.css";
 p.text-center.h1.fw-bold.mb-5.mx-1.mx-md-4.mt-4 {
-    font-size: 3vw;
+    font-size: 1.4rem;
 }
 
 li.text-respo {
-    font-size: 1.4vw;
+    font-size: 0.95rem;
 }

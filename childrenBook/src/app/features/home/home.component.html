@@ -8,8 +8,8 @@
             <form #f="ngForm" (submit)="searchBooks(f.value.text)">
               <div class="form">
                 <i class="fas fa-search fs-4"></i><input type="text" class="form-control form-input"
-                                                         placeholder="Search Book..." [ngModel]="text" name="text"> <span class="left-pan"><button
-                class="btn btn-secondary" type="submit">Search</button></span>
+                  placeholder="Search Book..." [ngModel]="text" name="text"> <span class="left-pan"><button
+                    class="btn btn-secondary" type="submit">Search</button></span>
                 </div>
                 </form>
                 </span>
@@ -70,7 +70,11 @@
             'ion-ios-star-outline':  i >= active?.stars
             }"></i>
                     <br>
-                    <b>Price: {{active?.price}} €</b>
+                    <b>Price:
+            <i *ngFor="let item of cart.items;index as i">
+              <em *ngIf="cart.items[i].book.isbn === active?.isbn && item.count > 1 "> (x{{item.count}}) </em>
+            </i>
+            {{active?.price}} €</b>
                 </p>
                 <button class="btn btn-success" (click)="cart.plusToCart(active)">Add to cart</button>
             </div>
