@@ -11,6 +11,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IntToArrayPipe } from './shared/pipes/int-to-array.pipe';
+import { SommaPrezzoPipe } from './shared/pipes/somma-prezzo.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { IntToArrayPipe } from './shared/pipes/int-to-array.pipe';
     RegisterComponent,
     FooterComponent,
     NavbarComponent,
-    IntToArrayPipe
+    IntToArrayPipe,
+    SommaPrezzoPipe
   ],
   imports: [
     BrowserModule,

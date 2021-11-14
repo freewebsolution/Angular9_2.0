@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Book} from '../../models/book';
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Book } from '../../models/book';
+import { HttpClient } from '@angular/common/http';
+import { CartService } from './../../core/services/cart.service';
 
 
 const url = 'http://localhost:8080/books'
@@ -9,13 +10,16 @@ const url = 'http://localhost:8080/books'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-  text= "Ragazzi";
+export class HomeComponent implements OnInit {
+  text = "Ragazzi";
   books: Book[];
   active: Book;
-  constructor(private http: HttpClient){}
+  constructor(
+    public cart: CartService,
+    private http: HttpClient
+  ) { }
 
-  searchBooks(text:string): any {
+  searchBooks(text: string): any {
     this.http.get<Book[]>(`${url}?q=${text}`)
       .subscribe(res => {
         this.books = res
@@ -27,9 +31,13 @@ export class HomeComponent implements OnInit{
   ngOnInit(): any {
     this.searchBooks(this.text)
   }
-  setActive(book:Book):any {
+  setActive(book: Book): any {
     this.active = book;
     console.log(this.active)
+  }
+
+  addToCart(active: Book): any {
+    this.cart.plusToCart(active)
   }
 
 

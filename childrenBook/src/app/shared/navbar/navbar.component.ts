@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import { NavigationStart, Router,Event as NavigationEvent } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { CartService } from './../../core/services/cart.service';
 
 @Component({
   selector: 'cb-navbar',
@@ -8,17 +9,21 @@ import { NavigationStart, Router,Event as NavigationEvent } from '@angular/route
 })
 export class NavbarComponent {
   event$
-  current!:string
-  constructor(private router: Router, private route:Router ) {
+  current!: string
+  constructor(
+    public cart: CartService,
+    private router: Router,
+    private route: Router
+  ) {
     this.event$
-      =this.router.events
-      .subscribe(
-        (event: NavigationEvent) => {
-          if(event instanceof NavigationStart) {
-            this.current = event.url;
-            console.log(this.current);
-          }
-        });
+      = this.router.events
+        .subscribe(
+          (event: NavigationEvent) => {
+            if (event instanceof NavigationStart) {
+              this.current = event.url;
+              console.log(this.current);
+            }
+          });
   }
 
 
