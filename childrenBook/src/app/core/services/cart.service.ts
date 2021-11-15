@@ -1,16 +1,18 @@
 import { ComponentFactoryResolver, Injectable } from "@angular/core";
 import { CartItem } from './../../models/cart-items';
 import { Book } from './../../models/book';
-import { find } from "rxjs";
-import { ControlContainer } from "@angular/forms";
-import { ThisReceiver } from "@angular/compiler";
+import { AuthService } from "./auth.service";
 
 
 @Injectable({
   'providedIn': 'root'
 })
 export class CartService {
+  constructor(
+    private auth: AuthService
+  ) { }
   items: CartItem[] = []
+  data: any = []
   plusToCart(book: Book): any {
     let index = this.items?.findIndex(i => i.book.id === book.id)
     if (!this.items[index]) {
@@ -48,6 +50,19 @@ export class CartService {
   }
 
   proceed(): any {
-    console.log(this.items.length)
+    let length = this.items.length;
+    console.log(`
+    Total item: ${length},
+    Order: ${this.auth.data.name},
+    Email: ${this.auth.data.email},
+    `
+    )
+    // for (let i = 0; i <= length; i++) {
+    //   this.data = [
+    //     ...this.data,
+    //     [i +1, this.items[i]?.book.title , this.items[i]?.book.price]
+    //   ]
+    //   console.log(this.data)
+    // }
   }
 }
