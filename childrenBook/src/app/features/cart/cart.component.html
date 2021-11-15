@@ -22,7 +22,7 @@
                                 </ul>
                                 <p *ngIf="cart.items.length">Totale:
                                     <span style="color:red">
-                    {{locationsSum() |number:'1.2'}}
+                    {{locationsSum() | number:'1.2'}}
                   </span> €
                                     <button type="submit " (click)="cart.proceed() " class="btn btn-success float-end ">Proceed</button>
                                 </p>

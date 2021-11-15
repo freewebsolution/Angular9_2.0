@@ -16,6 +16,8 @@ import { HeaderFormComponent } from './features/home/components/header-form/head
 import { SearchResultComponent } from './features/home/components/search-list/search-list.component';
 import { InfoBookComponent } from './features/home/components/info-book/info-book.component';
 import { ModalComponent } from './features/home/components/info-book/modal.component';
+import { NoResultsComponent } from './features/home/no-results.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,13 +33,15 @@ import { ModalComponent } from './features/home/components/info-book/modal.compo
     HeaderFormComponent,
     SearchResultComponent,
     InfoBookComponent,
-    ModalComponent
+    ModalComponent,
+    NoResultsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
 
   ],
   providers: [],

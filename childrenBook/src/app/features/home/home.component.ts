@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from './../../core/services/cart.service';
+import {Router} from '@angular/router';
 
 
 const url = 'http://localhost:8080/books'
@@ -16,12 +17,17 @@ export class HomeComponent implements OnInit {
   active: Book;
   constructor(
     public cart: CartService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   searchBooks(text: string): any {
     this.http.get<Book[]>(`${url}?q=${text}`)
       .subscribe(res => {
+        if(!res.length){
+          this.router.navigateByUrl('no-results')
+          return;
+        }
         this.books = res
         console.log(res)
         this.text = text
