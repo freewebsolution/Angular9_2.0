@@ -1,84 +1,15 @@
-<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <h1 class="headerTitle">Children Books</h1>
-                    <span class="subheading">
-            <form #f="ngForm" (submit)="searchBooks(f.value.text)">
-              <div class="form">
-                <i class="fas fa-search fs-4"></i><input type="text" class="form-control form-input"
-                  placeholder="Search Book..." [ngModel]="text" name="text"> <span class="left-pan"><button
-                    class="btn btn-secondary" type="submit">Search</button></span>
-                </div>
-                </form>
-                </span>
-            </div>
-        </div>
-    </div>
-    </div>
-</header>
+<cb-header-form [text]="text" (search)="searchBooks($event)"></cb-header-form>
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5">
         <!--search result-->
         <div class="col-sm-6 mb-3" [ngClass]="{'border-radius':this.books?.length > 2}">
-            <div *ngIf="this.books">
-                <small><b>Result for {{text}}: {{this.books?.length}} items</b></small>
-                <hr class="my-1" />
-            </div>
-            <!-- Search preview-->
-            <div *ngFor="let book of books" class="post-preview searchResult" (click)="setActive(book)" [ngClass]="{'active':book.id === this.active?.id}">
-                <img [src]="book.images" class="img-fluid" alt="">
-                <h4 class="post-title">{{book.title}}</h4>
-                <p class="post-meta">Autore: <em><i>{{book.author}}</i></em>
-                    <br> Isbn: {{book.isbn}}
-                </p>
-                <hr class="my-4" />
-            </div>
+            <cb-search-result [text]="text" [active]="active" [books]="books" (setActive)="setActive($event)">
+            </cb-search-result>
         </div>
-        <!--feedback and cart-->
         <div class="col-sm-6">
             <!-- Post preview-->
-            <div class="post-preview">
-                <h2 class="post-title">{{active?.title}}
-                    <i class="fas fa-info-circle blue" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                </h2>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{active?.title}}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                {{active?.description}}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="post-meta">
-                    Author: {{active?.author}} <br> Isbn: {{active?.isbn}}<br> Pagine: {{active?.pagine}}<br> Categorie: {{active?.categoria}}
-                    <br> Anno di uscita: {{active?.anno}}
-                    <br> Feedback:
-                    <i *ngFor="let star of 5 | intToArray;let i = index" class="icon" [ngClass]="{
-            'ion-ios-star gold': i < active?.stars,
-            'ion-ios-star-outline':  i >= active?.stars
-            }"></i>
-                    <br>
-                    <b>Price:
-            <i *ngFor="let item of cart.items;index as i">
-              <em *ngIf="cart.items[i].book.isbn === active?.isbn && item.count > 1 "> (x{{item.count}}) </em>
-            </i>
-            {{active?.price}} €</b>
-                </p>
-                <button class="btn btn-success" (click)="cart.plusToCart(active)">Add to cart</button>
-            </div>
-
+            <cb-info-book [items]="cart.items" [active]="active" (addTocart)="addToCart($event)"></cb-info-book>
             <!-- Pager-->
         </div>
     </div>
