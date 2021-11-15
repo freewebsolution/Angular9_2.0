@@ -12,6 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IntToArrayPipe } from './shared/pipes/int-to-array.pipe';
 import { SommaPrezzoPipe } from './shared/pipes/somma-prezzo.pipe';
+import { HeaderFormComponent } from './features/home/components/header-form/header-form.component';
+import { SearchResultComponent } from './features/home/components/search-result/search-result.component';
+import { InfoBookComponent } from './features/home/components/info-book/info-book.component';
+import { ModalComponent } from './features/home/components/info-book/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { SommaPrezzoPipe } from './shared/pipes/somma-prezzo.pipe';
     FooterComponent,
     NavbarComponent,
     IntToArrayPipe,
-    SommaPrezzoPipe
+    SommaPrezzoPipe,
+    HeaderFormComponent,
+    SearchResultComponent,
+    InfoBookComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
