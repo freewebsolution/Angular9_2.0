@@ -9,13 +9,12 @@ import { CartService } from './../../core/services/cart.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  event$
+  event$:any
   current!: string
   constructor(
     public cart: CartService,
     public auth:AuthService,
     private router: Router,
-    private route: Router
   ) {
     this.event$
       = this.router.events
@@ -23,7 +22,6 @@ export class NavbarComponent {
           (event: NavigationEvent) => {
             if (event instanceof NavigationStart) {
               this.current = event.url;
-              console.log(this.current);
             }
           });
   }

@@ -1,4 +1,4 @@
-<nav *ngIf="auth.isLogged()" class="navbar navbar-expand-lg" [ngClass]="this.current === '/cart' || this.current === '/register' || this.current === '/login' || this.current === '/no-results' ? 'navbar-dark bg-dark':'navbar-light'" id="mainNav">
+<nav class="navbar navbar-expand-lg" [ngClass]="this.current === '/cart' || this.current === '/register' || this.current === '/login' || this.current === '/no-results' ? 'navbar-dark bg-dark':'navbar-light'" id="mainNav">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" routerLink="/"><i class="fas fa-book fs-3"></i> <span class="grey"> ChildrenBook</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,10 +7,10 @@
     </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="home">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="cursor: pointer;" (click)="auth.logout()">logout</a></li>
+                <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="home">Home</a></li>
+                <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="cursor: pointer;" (click)="auth.logout()">logout</a></li>
                 <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="register">Register</a></li> -->
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="cart"><i
+                <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="cart"><i
               class="fas fa-cart-arrow-down fs-5"></i><span *ngIf="cart.items.length">({{cart.items.length}})</span>
           </a></li>
                 <li class="nav-item">
