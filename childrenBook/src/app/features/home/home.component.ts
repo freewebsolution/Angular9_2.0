@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     this.http.get<Book[]>(`${url}?q=${text}`)
       .subscribe(res => {
         if(!res.length){
-          this.router.navigateByUrl('no-results')
+          this.router.navigateByUrl('home/no-results')
           return;
         }
         this.books = res

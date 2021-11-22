@@ -13,7 +13,7 @@ import { Component} from '@angular/core';
                   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">No Results</p>
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">La tua ricerca non ha prodotto risultati!!</p>
-                    <button class="btn btn-dark" routerLink="home">Back</button>
+                    <button class="btn btn-dark" routerLink="../">Back</button>
                   </div>
                   <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
 

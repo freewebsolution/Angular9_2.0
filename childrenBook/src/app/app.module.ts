@@ -5,10 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
-import { CartModule } from './features/cart/cart.module';
-import { LoginModule } from './features/login/login.module';
-import { HomeModule } from './features/home/home.module';
-import { RegisterModule } from './features/register/register.module';
+
 
 @NgModule({
   declarations: [
@@ -19,11 +16,7 @@ import { RegisterModule } from './features/register/register.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SharedModule,
-    CartModule,
-    LoginModule,
-    HomeModule,
-    RegisterModule
+    SharedModule
 
 
   ],

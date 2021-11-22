@@ -13,7 +13,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule.forChild([
+      {path: '', component:LoginComponent}
+    ])
   ]
 })
 export class LoginModule { }

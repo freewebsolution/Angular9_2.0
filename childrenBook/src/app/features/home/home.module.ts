@@ -8,10 +8,7 @@ import { SearchResultComponent } from './components/search-list/search-list.comp
 import { NoResultsComponent } from './no-results.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
-
-
-
-
+import { HomeRoutingModule } from './home-routing.module';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,7 +21,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }
