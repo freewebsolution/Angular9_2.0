@@ -9,7 +9,7 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="home">Home</a></li>
                 <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="cursor: pointer;" (click)="auth.logout()">logout</a></li>
-                <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="register">Register</a></li> -->
+                <li *ngIf="!auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="register">Register</a></li>
                 <li *ngIf="auth.isLogged()" class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" routerLink="cart"><i
               class="fas fa-cart-arrow-down fs-5"></i><span *ngIf="cart.items.length">({{cart.items.length}})</span>
           </a></li>
